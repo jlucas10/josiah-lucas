@@ -1,11 +1,13 @@
 import FeaturedProject from './components/FeaturedProject'
 import Footer from './components/Footer'
+import ProjectCard from './components/ProjectCard'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Section from './components/Section'
 import { projects } from './data'
 
 const featured = projects.find((p) => p.featured)
+const others = projects.filter((p) => !p.featured)
 
 export default function App() {
   return (
@@ -22,7 +24,11 @@ export default function App() {
         <Hero />
         <Section id="projects" label="01 / Projects" title="Projects">
           {featured && <FeaturedProject project={featured} />}
-          {/* Other projects arrive in Milestone 4 */}
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {others.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
         </Section>
         <Section id="experience" label="02 / Experience" title="Experience" />
         <Section id="skills" label="03 / Skills" title="Skills" />
