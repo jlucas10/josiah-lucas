@@ -17,6 +17,18 @@ export default function FeaturedProject({ project }: { project: Project }) {
       <p className="mt-1 text-muted">{project.subtitle}</p>
       <p className="mt-5 max-w-3xl">{project.summary}</p>
 
+      {project.screenshot && (
+        <img
+          src={project.screenshot.src}
+          alt={project.screenshot.alt}
+          width={project.screenshot.width}
+          height={project.screenshot.height}
+          loading="lazy"
+          decoding="async"
+          className="mt-8 h-auto w-full rounded-lg border border-border"
+        />
+      )}
+
       {project.keyNumbers && (
         <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">
           {project.keyNumbers.map((n) => (

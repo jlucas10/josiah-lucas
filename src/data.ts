@@ -30,6 +30,13 @@ export interface ProjectLink {
   kind: 'demo' | 'github' | 'pr'
 }
 
+export interface Screenshot {
+  src: string
+  alt: string
+  width: number
+  height: number
+}
+
 export interface Project {
   id: string
   featured?: boolean
@@ -37,6 +44,7 @@ export interface Project {
   subtitle: string
   dates: string
   summary: string
+  screenshot?: Screenshot
   hardParts: string[]
   results?: string[]
   keyNumbers?: KeyNumber[]
@@ -90,6 +98,12 @@ export const projects: Project[] = [
     dates: 'May–Oct 2026',
     summary:
       'A full-stack journal that tracks futures trades and prop-firm account rules, plus an AI assistant that answers questions about your trading history.',
+    screenshot: {
+      src: '/alphatracker-dashboard.jpg',
+      alt: 'AlphaTracker dashboard showing a 50k Topstep evaluation account with a $51,612.50 balance, a $49,612.50 trailing drawdown floor, profit-target and drawdown-room progress bars, a 46% win rate over 24 trades, average win and loss, an equity curve, and a monthly P&L calendar.',
+      width: 1600,
+      height: 782,
+    },
     hardParts: [
       'Spring Boot REST API that computes all P&L, commissions, and drawdown on the server from one source of truth for 12 CME futures contracts.',
       'Trailing drawdown engine that replays closed-trade history to compute the high-water mark and live floor (end-of-day and per-trade modes).',
