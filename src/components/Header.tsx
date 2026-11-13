@@ -1,4 +1,5 @@
 import { navItems, profile } from '../data'
+import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
   return (
@@ -8,7 +9,7 @@ export default function Header() {
           {profile.name}
         </a>
         <nav aria-label="Primary">
-          <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted sm:gap-x-5">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a href={`#${item.id}`} className="hover:text-fg">
@@ -18,6 +19,7 @@ export default function Header() {
             ))}
           </ul>
         </nav>
+        <ThemeToggle />
       </div>
     </header>
   )
