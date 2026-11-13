@@ -1,3 +1,5 @@
+import About from './components/About'
+import Contact from './components/Contact'
 import Experience from './components/Experience'
 import FeaturedProject from './components/FeaturedProject'
 import Footer from './components/Footer'
@@ -38,8 +40,12 @@ export default function App() {
         <Section id="skills" label="03 / Skills" title="Skills">
           <Skills />
         </Section>
-        <Section id="about" label="04 / About" title="About" />
-        <Section id="contact" label="05 / Contact" title="Contact" />
+        <Section id="about" label="04 / About" title="About">
+          <About />
+        </Section>
+        <Section id="contact" label="05 / Contact" title="Contact">
+          <Contact />
+        </Section>
       </main>
       <Footer />
     </>
