@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Skills from './components/Skills'
 import Section from './components/Section'
+import { Analytics } from '@vercel/analytics/react'
 import { projects } from './data'
 
 const featured = projects.find((p) => p.featured)
@@ -48,6 +49,7 @@ export default function App() {
         </Section>
       </main>
       <Footer />
+      <Analytics />
     </>
   )
 }
