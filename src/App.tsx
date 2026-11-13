@@ -1,5 +1,6 @@
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Hero from './components/Hero'
 import Section from './components/Section'
 
 export default function App() {
@@ -14,7 +15,7 @@ export default function App() {
       <Header />
       <main id="main" className="mx-auto max-w-5xl px-4 sm:px-6">
         <div id="top" />
-        {/* Hero arrives in Milestone 2 */}
+        <Hero />
         <Section id="projects" label="01 / Projects" title="Projects" />
         <Section id="experience" label="02 / Experience" title="Experience" />
         <Section id="skills" label="03 / Skills" title="Skills" />
