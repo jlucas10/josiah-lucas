@@ -1,15 +1,20 @@
 // All site content lives here. Add a project by appending to `projects`;
 // no layout code needs to change.
 
+export interface AboutContent {
+  /** Pull-quote lead line; `accent` is the highlighted phrase. */
+  lead: { before: string; accent: string; after: string }
+  paragraphs: string[]
+  quote: { text: string; author: string; source: string }
+}
+
 export interface Profile {
   name: string
   role: string
   pitch: string
   location: string
   education: string
-  bio: string[]
   coursework: string[]
-  highlights: string[]
 }
 
 export interface SiteLinks {
@@ -83,16 +88,25 @@ export const profile: Profile = {
   pitch: 'Backend engineer building reliable APIs and grounded, well-tested AI agents.',
   location: 'Hayward, CA (Bay Area) · open to relocation',
   education: 'B.S. Computer Science, San Francisco State University (August 2026)',
-  bio: [
-    'CS grad focused on backend engineering and applied AI. I built and deployed AlphaTracker, a full-stack trading journal with an AI assistant, and I’m a merged contributor to Alibaba’s open-code-review (30k+ stars).',
-    'I worked 35+ hours a week while finishing a full-time CS degree, and completed the CodePath Technical Interview Prep fellowship.',
-  ],
   coursework: ['Deep Learning', 'Systems Programming', 'Data Structures & Algorithms'],
-  highlights: [
-    'Merged contributor to Alibaba open-code-review (30k+ stars)',
-    'CodePath Technical Interview Prep fellowship',
-    'Worked 35+ hrs/week while completing a full-time CS degree',
+}
+
+export const about: AboutContent = {
+  lead: {
+    before: 'I build backend systems and AI agents that ',
+    accent: 'hold up in production',
+    after: ', not just in a demo.',
+  },
+  paragraphs: [
+    'Most of my work sits where those two meet: APIs that own the numbers, and AI assistants that aren’t allowed to make them up.',
+    'Futures trading and marathon running taught me to trust the process over any single result: log everything, test the plan, review honestly. I bring the same habits to engineering, with tests that run against real databases and eval harnesses before I trust a model’s answers.',
+    'I finished my B.S. in Computer Science at SF State while working 35+ hours a week, and completed CodePath’s Technical Interview Prep fellowship. I’m looking for backend, applied AI, and software engineering roles where I can learn fast and own real problems, in the Bay Area or anywhere I’d relocate for.',
   ],
+  quote: {
+    text: 'You have power over your mind, not outside events. Realize this, and you will find strength.',
+    author: 'Marcus Aurelius',
+    source: 'Meditations',
+  },
 }
 
 export const links: SiteLinks = {
