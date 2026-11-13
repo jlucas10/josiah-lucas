@@ -24,7 +24,7 @@ export default function App() {
         Skip to content
       </a>
       <Header />
-      <main id="main" className="mx-auto max-w-5xl px-4 sm:px-6">
+      <main id="main">
         <div id="top" />
         <Hero />
         <Section id="projects" label="01 / Projects" title="Projects">
@@ -35,13 +35,13 @@ export default function App() {
             ))}
           </div>
         </Section>
-        <Section id="experience" label="02 / Experience" title="Experience">
+        <Section id="experience" label="02 / Experience" title="Experience" tone="panel">
           <Experience />
         </Section>
         <Section id="skills" label="03 / Skills" title="Skills">
           <Skills />
         </Section>
-        <Section id="about" label="04 / About" title="About">
+        <Section id="about" label="04 / About" title="About" tone="panel">
           <About />
         </Section>
         <Section id="contact" label="05 / Contact" title="Contact">
