@@ -3,22 +3,26 @@
 /* Theme tokens. Dark is the default; `.light` on <html> switches (toggle arrives in M7). */
 :root {
   --bg: #0b0f14;
+  --panel: #0f161e;
   --surface: #121821;
   --border: #243040;
   --fg: #e6edf3;
   --muted: #9aa7b5;
   --accent: #2dd4bf;
   --accent-fg: #04201c;
+  --shadow: rgba(0, 0, 0, 0.55);
   color-scheme: dark;
 }
 :root.light {
   --bg: #fafaf9;
+  --panel: #eef1f3;
   --surface: #ffffff;
   --border: #d6dbe1;
   --fg: #12171d;
   --muted: #4a5663;
-  --accent: #0f766e;
+  --accent: #0b6b63;
   --accent-fg: #ffffff;
+  --shadow: rgba(15, 23, 42, 0.18);
   color-scheme: light;
 }
 
@@ -26,6 +30,7 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
   --color-bg: var(--bg);
+  --color-panel: var(--panel);
   --color-surface: var(--surface);
   --color-border: var(--border);
   --color-fg: var(--fg);
@@ -60,4 +65,46 @@ body {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* Soft shadow used by framed visuals and hovered cards. */
+.shadow-frame {
+  box-shadow: 0 24px 48px -24px var(--shadow);
+}
+
+/* Quiet hero background: accent glow plus a faint grid that fades out. */
+.hero-bg::before,
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-bg::before {
+  background: radial-gradient(
+    55% 90% at 85% 0%,
+    color-mix(in srgb, var(--accent) 14%, transparent),
+    transparent 70%
+  );
+}
+.hero-bg::after {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(70% 100% at 80% 0%, #000, transparent 75%);
+  -webkit-mask-image: radial-gradient(70% 100% at 80% 0%, #000, transparent 75%);
+}
+
+/* The dashboard screenshot is a bright white UI; dim it a little on the dark theme. */
+.screenshot-img {
+  filter: brightness(0.82) contrast(1.02);
+  transition: filter 0.3s ease;
+}
+.screenshot-img:hover {
+  filter: none;
+}
+:root.light .screenshot-img {
+  filter: none;
 }

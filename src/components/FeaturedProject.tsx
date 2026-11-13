@@ -2,11 +2,42 @@ import type { Project } from '../data'
 import ArchitectureDiagram from './ArchitectureDiagram'
 import Tag from './Tag'
 
+function BrowserFrame({ project }: { project: Project }) {
+  const shot = project.screenshot!
+  const demo = project.links.find((l) => l.kind === 'demo')
+  const host = demo ? new URL(demo.href).host : ''
+  return (
+    <div className="shadow-frame mt-8 overflow-hidden rounded-xl border border-border bg-panel">
+      <div className="flex items-center gap-3 border-b border-border px-4 py-2.5">
+        <span className="flex gap-1.5" aria-hidden="true">
+          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+          <span className="h-2.5 w-2.5 rounded-full bg-border" />
+        </span>
+        {host && (
+          <span className="min-w-0 flex-1 truncate rounded bg-bg px-3 py-1 text-center font-mono text-xs text-muted">
+            {host}
+          </span>
+        )}
+      </div>
+      <img
+        src={shot.src}
+        alt={shot.alt}
+        width={shot.width}
+        height={shot.height}
+        loading="lazy"
+        decoding="async"
+        className="screenshot-img block h-auto w-full"
+      />
+    </div>
+  )
+}
+
 export default function FeaturedProject({ project }: { project: Project }) {
   return (
     <article
       aria-labelledby={`${project.id}-title`}
-      className="rounded-xl border border-border bg-surface p-6 sm:p-10"
+      className="rounded-xl border border-border bg-surface p-6 transition-colors hover:border-accent/60 sm:p-10"
     >
       <p className="font-mono text-xs uppercase tracking-widest text-accent">
         Featured · {project.dates}
@@ -17,20 +48,10 @@ export default function FeaturedProject({ project }: { project: Project }) {
       <p className="mt-1 text-muted">{project.subtitle}</p>
       <p className="mt-5 max-w-3xl">{project.summary}</p>
 
-      {project.screenshot && (
-        <img
-          src={project.screenshot.src}
-          alt={project.screenshot.alt}
-          width={project.screenshot.width}
-          height={project.screenshot.height}
-          loading="lazy"
-          decoding="async"
-          className="mt-8 h-auto w-full rounded-lg border border-border"
-        />
-      )}
+      {project.screenshot && <BrowserFrame project={project} />}
 
       {project.keyNumbers && (
-        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">
+        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border border-t-accent bg-border sm:grid-cols-3 lg:grid-cols-5">
           {project.keyNumbers.map((n) => (
             <div key={n.label} className="bg-bg p-4 last:col-span-2 sm:last:col-span-2 lg:last:col-span-1">
               <dt className="sr-only">{n.label}</dt>
@@ -83,8 +104,8 @@ export default function FeaturedProject({ project }: { project: Project }) {
             rel="noopener noreferrer"
             className={
               l.kind === 'demo'
-                ? 'rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-accent-fg hover:opacity-90'
-                : 'rounded-md border border-border px-4 py-2.5 text-sm font-medium hover:border-accent hover:text-accent'
+                ? 'rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90'
+                : 'rounded-md border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent'
             }
           >
             {l.label}

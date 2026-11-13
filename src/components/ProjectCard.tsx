@@ -1,12 +1,14 @@
 import type { Project } from '../data'
+import ProjectVisual from './ProjectVisual'
 import Tag from './Tag'
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
     <article
       aria-labelledby={`${project.id}-title`}
-      className="flex flex-col rounded-xl border border-border bg-surface p-6"
+      className="flex flex-col overflow-hidden rounded-xl border border-border bg-surface p-6 transition duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-frame motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >
+      {project.visual && <ProjectVisual visual={project.visual} />}
       <p className="font-mono text-xs uppercase tracking-widest text-accent">{project.dates}</p>
       <h3 id={`${project.id}-title`} className="mt-3 text-xl font-semibold tracking-tight">
         {project.title}
@@ -35,7 +37,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             href={l.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:border-accent hover:text-accent"
+            className="rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
           >
             {l.label}
             <span className="sr-only"> (opens in a new tab)</span>

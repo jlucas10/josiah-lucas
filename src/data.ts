@@ -37,6 +37,10 @@ export interface Screenshot {
   height: number
 }
 
+export type ProjectVisual =
+  | { type: 'pipeline'; steps: string[]; caption: string }
+  | { type: 'report'; caption: string }
+
 export interface Project {
   id: string
   featured?: boolean
@@ -45,6 +49,7 @@ export interface Project {
   dates: string
   summary: string
   screenshot?: Screenshot
+  visual?: ProjectVisual
   hardParts: string[]
   results?: string[]
   keyNumbers?: KeyNumber[]
@@ -53,10 +58,18 @@ export interface Project {
 }
 
 export interface Experience {
-  role: string
+  title: string
   org: string
   dates: string
+  kind: string
   summary: string
+  link?: { label: string; href: string }
+}
+
+export interface HeroSnippet {
+  title: string
+  note: string
+  fields: { key: string; value: string | number }[]
 }
 
 export interface SkillGroup {
@@ -107,14 +120,11 @@ export const projects: Project[] = [
     hardParts: [
       'Spring Boot REST API that computes all P&L, commissions, and drawdown on the server from one source of truth for 12 CME futures contracts.',
       'Trailing drawdown engine that replays closed-trade history to compute the high-water mark and live floor (end-of-day and per-trade modes).',
-      'Moved file storage from local disk to AWS S3 behind a pluggable interface with zero changes to calling code; JWT auth with per-request ownership checks.',
-      'AI assistant: Python FastAPI agent using Gemini function calling over read-only, user-scoped tools on the Spring API.',
       'Grounding guard that checks every number in the model’s answer against tool outputs and retries ungrounded answers.',
     ],
     results: [
       '65+ JUnit 5/Mockito tests against real PostgreSQL; they caught a double-counting bug and a password-hash leak.',
-      'Grounding guard cut the correction rate from 12% to 2.7%.',
-      '50-question eval harness across 9 categories including prompt injection: 148/150 passed, 18/18 on a blind held-out set, 100% tool-selection accuracy.',
+      '50-question eval harness across 9 categories including prompt injection: 148/150 passed, 18/18 on a blind held-out set.',
       'Sliding-window rate limiting verified by a concurrency test.',
     ],
     keyNumbers: [
@@ -150,6 +160,11 @@ export const projects: Project[] = [
     dates: 'May–Jun 2026',
     summary:
       'An async Python pipeline on Gemini 2.5 Flash that analyzes image and text evidence for insurance fraud review.',
+    visual: {
+      type: 'pipeline',
+      steps: ['Image + text evidence', 'Gemini 2.5 Flash', 'Pydantic schema check', 'Guardrails', 'Decision'],
+      caption: 'Async Python pipeline',
+    },
     hardParts: [
       'Every model response is validated against Pydantic schemas to produce type-safe JSON.',
       'Guardrails catch hallucinated and out-of-scope output before the final decision.',
@@ -170,6 +185,10 @@ export const projects: Project[] = [
     dates: 'Sep 2026',
     summary:
       'Restyled the coverage and token-usage report in a Go-templated tool used across the project’s review pipeline, keeping its data bindings working in light and dark themes; merged after code review.',
+    visual: {
+      type: 'report',
+      caption: 'Coverage and token-usage report, restyled for light and dark themes (illustrative)',
+    },
     hardParts: [],
     stack: ['Go', 'HTML/CSS'],
     links: [
@@ -180,13 +199,56 @@ export const projects: Project[] = [
 
 export const experience: Experience[] = [
   {
-    role: 'Guest Experience Host',
+    title: 'Merged contributor',
+    org: 'Alibaba open-code-review (30k+ ★)',
+    dates: 'Sep 2026',
+    kind: 'Open source',
+    summary:
+      'Restyled the coverage and token-usage report in a Go-templated tool, keeping its data bindings working in light and dark themes; merged after code review.',
+    link: { label: 'View pull request', href: 'https://github.com/alibaba/open-code-review/pull/1346' },
+  },
+  {
+    title: 'Multi-Modal Evidence Review AI Agent',
+    org: 'HackerRank Orchestrate Hackathon',
+    dates: 'May–Jun 2026',
+    kind: 'Hackathon',
+    summary:
+      'Built an async Python pipeline on Gemini 2.5 Flash with Pydantic-validated output and guardrails for insurance fraud review.',
+    link: { label: 'View on GitHub', href: 'https://github.com/jlucas10/hackerrank-orchestrate-june26' },
+  },
+  {
+    title: 'Technical Interview Prep fellowship',
+    org: 'CodePath',
+    dates: 'Completed',
+    kind: 'Fellowship',
+    summary: 'Completed the CodePath Technical Interview Prep fellowship.',
+  },
+  {
+    title: 'Guest Experience Host',
     org: 'Corica Park',
     dates: 'May 2025 – Present',
+    kind: 'Work',
     summary:
       'First point of contact for guests; booked tee times, kept groups on schedule, and helped run tournaments while working 35+ hrs/week during a full-time CS degree.',
   },
 ]
+
+export const coreStack = ['Java', 'Spring Boot', 'PostgreSQL', 'Python', 'FastAPI', 'React']
+
+// Values mirror the demo account shown in the AlphaTracker dashboard screenshot.
+// Field names are illustrative.
+export const heroSnippet: HeroSnippet = {
+  title: 'account-summary.json',
+  note: 'sample · demo account · computed server-side',
+  fields: [
+    { key: 'account', value: '50k Topstep Live' },
+    { key: 'drawdown_mode', value: 'EOD' },
+    { key: 'balance', value: 51612.5 },
+    { key: 'drawdown_floor', value: 49612.5 },
+    { key: 'buffer_left', value: 2000 },
+    { key: 'net_pnl', value: 1612.5 },
+  ],
+}
 
 export const skillGroups: SkillGroup[] = [
   { label: 'Languages', items: ['Java', 'TypeScript', 'Go', 'Python', 'C++'] },
