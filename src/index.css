@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+/* Theme tokens. Dark is the default; `.light` on <html> switches (toggle arrives in M7). */
+:root {
+  --bg: #0b0f14;
+  --surface: #121821;
+  --border: #243040;
+  --fg: #e6edf3;
+  --muted: #9aa7b5;
+  --accent: #2dd4bf;
+  --accent-fg: #04201c;
+  color-scheme: dark;
+}
+:root.light {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --border: #d6dbe1;
+  --fg: #12171d;
+  --muted: #4a5663;
+  --accent: #0f766e;
+  --accent-fg: #ffffff;
+  color-scheme: light;
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
