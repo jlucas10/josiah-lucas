@@ -1,8 +1,10 @@
+import Experience from './components/Experience'
 import FeaturedProject from './components/FeaturedProject'
 import Footer from './components/Footer'
 import ProjectCard from './components/ProjectCard'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Skills from './components/Skills'
 import Section from './components/Section'
 import { projects } from './data'
 
@@ -30,8 +32,12 @@ export default function App() {
             ))}
           </div>
         </Section>
-        <Section id="experience" label="02 / Experience" title="Experience" />
-        <Section id="skills" label="03 / Skills" title="Skills" />
+        <Section id="experience" label="02 / Experience" title="Experience">
+          <Experience />
+        </Section>
+        <Section id="skills" label="03 / Skills" title="Skills">
+          <Skills />
+        </Section>
         <Section id="about" label="04 / About" title="About" />
         <Section id="contact" label="05 / Contact" title="Contact" />
       </main>
