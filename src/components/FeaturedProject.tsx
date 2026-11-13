@@ -20,7 +20,7 @@ export default function FeaturedProject({ project }: { project: Project }) {
       {project.keyNumbers && (
         <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">
           {project.keyNumbers.map((n) => (
-            <div key={n.label} className="bg-bg p-4">
+            <div key={n.label} className="bg-bg p-4 last:col-span-2 sm:last:col-span-2 lg:last:col-span-1">
               <dt className="sr-only">{n.label}</dt>
               <dd className="font-mono text-xl font-semibold text-accent">{n.value}</dd>
               <p className="mt-1 text-xs text-muted" aria-hidden="true">
